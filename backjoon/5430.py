@@ -22,11 +22,36 @@
 
 # 출력
 # 각 테스트 케이스에 대해서, 입력으로 주어진 정수 배열에 함수를 수행한 결과를 출력한다. 만약, 에러가 발생한 경우에는 error를 출력한다.
-
 t = int(input())
 
+rst = []
 for _ in range(t):
     s = str(input())
     n = int(input())
-    arr = input()
-    
+    if n == 0:
+        arr = input()
+        arr = []
+    else:
+        arr = list(map(int, input()[1:-1].split(",")))
+    r = 0
+    front = 0
+    back = 0
+    for item in s:
+        if item == "R":
+            r += 1
+        if item == "D":
+            if r % 2 == 0:
+                front += 1
+            else:
+                back += 1
+    if front + back <= n:
+        arr = arr[front:n-back]
+        if r % 2 == 1:
+            rst.append(arr[::-1])
+        else:
+            rst.append(arr)
+    else:
+        rst.append("error")
+
+for i in range(t):
+    print(str(rst[i]).replace(" ", ""))
