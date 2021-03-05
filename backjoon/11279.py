@@ -46,9 +46,8 @@ def insert(heap, num):
 
 
 def remove(heap):
-    maxVal = heap[1]
     heap[1], heap[-1] = heap[-1], heap[1]
-    heap.pop()
+    maxVal = heap.pop()
     i = 1
     check = i
     left = 2*i
