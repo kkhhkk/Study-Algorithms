@@ -61,5 +61,6 @@ m = int(sys.stdin.readline())
 B = [int(x) for x in sys.stdin.readline().split()]
 
 A = Counter(A)
+print(A)
 for item in B:
     print(A[item], end=" ")
