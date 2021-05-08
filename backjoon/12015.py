@@ -24,4 +24,6 @@ for item in arr:
         dp.append(item)
     else:
         dp[idx] = item
+
+    print(dp)
 print(len(dp))

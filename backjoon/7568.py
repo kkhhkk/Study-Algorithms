@@ -24,22 +24,17 @@
 
 n = int(input())
 
-rst = []
 arr = []
 for _ in range(n):
     x, y = map(int, input().split())
-    temp = x+y
-    rst.append(temp)
     arr.append((x, y))
 
 result = []
 for i in range(n):
-    pivot = rst[i]
     cnt = 1
     for j in range(n):
-        if pivot < rst[j]:
-            if arr[i][0] <= arr[j][0] and arr[i][1] <= arr[j][1]:
-                cnt += 1
+        if arr[i][0] < arr[j][0] and arr[i][1] < arr[j][1]:
+            cnt += 1
     result.append(cnt)
 
 for i in range(n):

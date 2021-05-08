@@ -18,35 +18,32 @@
 import sys
 from collections import deque
 input = sys.stdin.readline
-n, m = map(int, input().split())
+
+n,m = map(int, input().split())
 arr = []
 for _ in range(n):
     arr.append(list(map(int, input().strip())))
-
-dx = [1, -1, 0, 0]
-dy = [0, 0, 1, -1]
-
+visit = [[[0]*2 for _ in range(m)] for _ in range(n)]
+q = deque([(0,0,1)])
+dx = [1,-1,0,0]
+dy = [0,0,1,-1]
 
 def bfs():
-    q = deque()
-    q.append([0, 0, 1])
-    visit = [[[0]*2 for _ in range(m)] for _ in range(n)]
-    visit[0][0][1] = 1
-    while(q):
-        x, y, w = q.popleft()
+    while(len(q)!=0):
+        x,y,c = q.popleft()
+        visit[0][0][1] = 1
         if x == n-1 and y == m-1:
-            return visit[x][y][w]
+            return visit[x][y][c]
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
-            if 0 <= nx < n and 0 <= ny < m:
-                if arr[nx][ny] == 1 and w == 1:
+            if 0<= nx < n and 0<= ny <m and visit[nx][ny][c] == 0:
+                if arr[nx][ny] == 1 and c == 1:
                     visit[nx][ny][0] = visit[x][y][1] + 1
-                    q.append([nx, ny, 0])
-                elif arr[nx][ny] == 0 and w == 0:
-                    visit[nx][ny][w] = visit[x][y][w] + 1
-                    q.append([nx, ny, w])
+                    q.append([nx,ny,0])
+                elif arr[nx][ny] == 0:
+                    q.append([nx,ny,c])
+                    visit[nx][ny][c] = visit[x][y][c] + 1
     return -1
 
-
-print(bfs())
+print(bfs())    
